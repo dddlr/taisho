@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'tsmc.apps.TsmcConfig',
+    'tspron.apps.TspronConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

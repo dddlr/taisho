@@ -1,0 +1,18 @@
+Looking at character {{ character }}. <a href="{% url 'tsmc:index' %}">Click here to return home</a><br>
+<ul>
+  <li>Initial: {{ character.initial }}</li>
+  <li>Final: {{ character.final }}</li>
+  <li>Tone: {{ character.tone }}</li>
+  <li>Openness: {{ character.openness }}</li>
+  <li>Division: {{ character.division }}</li>
+  {% if character.note %}
+  <li>Note: {{ character.note }}</li>
+  {% else %}
+  <li>No note for this entry</li>
+  {% endif %}
+</ul>
+<ul>
+  {% for taishanese in character.taishanese_set.all %}
+    <li>{{ taishanese.initial }} {{ taishanese.final }} {{ taishanese.tone }}</li>
+  {% endfor %}
+</ul>

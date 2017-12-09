@@ -1,0 +1,29 @@
+Top ten characters:
+{% if character_list %}
+  <table>
+    <thead>
+      <th>Char.</th>
+      <th>Initial</th>
+      <th>Final</th>
+      <th>Tone</th>
+      <th>Division</th>
+      <th>Openness</th>
+      <th>Note</th>
+    </thead>
+    <tbody>
+      {% for character in character_list %}
+      <tr>
+        <td><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+        <td>{{ character.initial }}</td>
+        <td>{{ character.final }}</td>
+        <td>{{ character.tone }}</td>
+        <td>{{ character.division }}</td>
+        <td>{{ character.openness }}</td>
+        <td>{{ character.note }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No characters found :(</p>
+{% endif %}
