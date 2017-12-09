@@ -9,18 +9,26 @@ Top ten characters:
       <th>Division</th>
       <th>Openness</th>
       <th>Note</th>
+      <th>Taishanese</th>
     </thead>
     <tbody>
       {% for character in character_list %}
-      <tr>
-        <td><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
-        <td>{{ character.initial }}</td>
-        <td>{{ character.final }}</td>
-        <td>{{ character.tone }}</td>
-        <td>{{ character.division }}</td>
-        <td>{{ character.openness }}</td>
-        <td>{{ character.note }}</td>
-      </tr>
+        {% with len=character.taishanese_set.all.count %}
+          {% for taishanese in character.taishanese_set.all %}
+            <tr>
+              {% if forloop.counter == 1 %}
+                <td rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+                <td rowspan="{{ len }}">{{ character.initial }}</td>
+                <td rowspan="{{ len }}">{{ character.final }}</td>
+                <td rowspan="{{ len }}">{{ character.tone }}</td>
+                <td rowspan="{{ len }}">{{ character.division }}</td>
+                <td rowspan="{{ len }}">{{ character.openness }}</td>
+                <td rowspan="{{ len }}">{{ character.note }}</td>
+              {% endif %}
+              <td>{{ taishanese }}</td>
+            </tr>
+          {% endfor %}
+        {% endwith %}
       {% endfor %}
     </tbody>
   </table>
