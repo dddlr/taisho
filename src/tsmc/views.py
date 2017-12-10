@@ -7,14 +7,6 @@ from django.views import generic
 
 from .models import Character, Taishanese
 
-class IndexView(generic.ListView):
-    template_name = 'tsmc/index.html'
-    context_object_name = 'character_list'
-
-    def get_queryset(self):
-        """Return ten arbitrarily-chosen characters."""
-        return Character.objects.all()[:10]
-
 class CharacterView(generic.DetailView):
     model = Character
     template_name = 'tsmc/character.html'
