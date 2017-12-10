@@ -1,4 +1,39 @@
-Top ten characters:
+<h1>Middle Chinese–Duanfen Taishanese database</h1>
+<p>Note that the rising changed tone is not taken into account.</p>
+<form action="{% url 'tsmc:search' %}" method="get">
+  <label for="char">Character(s):</label>
+    <input id="char" name="char" placeholder="e.g. 中文" type="text"><br>
+  <label for="initial">Initial:</label>
+    <input id="initial" maxlength="1" name="initial" placeholder="e.g. 疑" type="text"><br>
+  <label for="final">Final:</label>
+    <input id="final" maxlength="1" name="final" placeholder="e.g. 歌" type="text"><br>
+  <label for="tone">Tone:</label>
+    <input id="tone" maxlength="1" name="tone" placeholder="e.g. 平" type="text"><br>
+  <label for="openness">Openness:</label>
+    <input id="openness" maxlength="1" name="openness" placeholder="e.g. 開" type="text"><br>
+  <label for="division">Division (1 to 4):</label>
+    <input id="division" maxlength="1" name="division" min="1" max="4" type="number"><br>
+  <label for="note">Note:</label>
+    <input id="note" maxlength="10" name="note" type="text"><br>
+  <input type="submit" value="Search">
+</form>
+{% if length %}
+<p>{{ length }} results found.</p>
+{% endif %}
+{% if character_list.paginator %}
+  {% if character_list.has_previous %}
+    <a href="{{ paginator_path }}page={{ character_list.previous_page_number }}">Previous page</a>
+  {% else %}
+    Previous page
+  {% endif %}
+  {% if character_list.has_next %}
+    <a href="{{ paginator_path }}page={{ character_list.next_page_number }}">Next page</a>
+  {% else %}
+    Next page
+  {% endif %}
+{% else %}
+<p>You haven’t searched for anything yet. Returning some arbitrarily-chosen entries.</p>
+{% endif %}
 {% if character_list %}
   <table>
     <thead>
@@ -14,20 +49,33 @@ Top ten characters:
     <tbody>
       {% for character in character_list %}
         {% with len=character.taishanese_set.all.count %}
-          {% for taishanese in character.taishanese_set.all %}
+          {% if character.taishanese_set.all %}
+            {% for taishanese in character.taishanese_set.all %}
+              <tr>
+                {% if forloop.counter == 1 %}
+                  <td rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+                  <td rowspan="{{ len }}">{{ character.initial }}</td>
+                  <td rowspan="{{ len }}">{{ character.final }}</td>
+                  <td rowspan="{{ len }}">{{ character.tone }}</td>
+                  <td rowspan="{{ len }}">{{ character.division }}</td>
+                  <td rowspan="{{ len }}">{{ character.openness }}</td>
+                  <td rowspan="{{ len }}">{{ character.note }}</td>
+                {% endif %}
+                <td>{{ taishanese }}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
             <tr>
-              {% if forloop.counter == 1 %}
-                <td rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
-                <td rowspan="{{ len }}">{{ character.initial }}</td>
-                <td rowspan="{{ len }}">{{ character.final }}</td>
-                <td rowspan="{{ len }}">{{ character.tone }}</td>
-                <td rowspan="{{ len }}">{{ character.division }}</td>
-                <td rowspan="{{ len }}">{{ character.openness }}</td>
-                <td rowspan="{{ len }}">{{ character.note }}</td>
-              {% endif %}
+              <td><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+              <td>{{ character.initial }}</td>
+              <td>{{ character.final }}</td>
+              <td>{{ character.tone }}</td>
+              <td>{{ character.division }}</td>
+              <td>{{ character.openness }}</td>
+              <td>{{ character.note }}</td>
               <td>{{ taishanese }}</td>
             </tr>
-          {% endfor %}
+          {% endif %}
         {% endwith %}
       {% endfor %}
     </tbody>
