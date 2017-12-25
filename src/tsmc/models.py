@@ -12,12 +12,13 @@ class Character(models.Model):
     division = models.IntegerField("division in Middle Chinese")
     note = models.CharField("note on character", max_length=10, blank=True)
 
-    def __str__(self):
-        return self.char
+    def division_chinese(self):
+        divisions = ['一', '二', '三', '四']
+        return divisions[self.division - 1]
 
-    def info(self):
-        return self.char + self.initial + self.final + self.tone + \
-        self.openness + self.division
+    def __str__(self):
+        return self.char + '（' + self.initial + self.final + self.tone + \
+        self.openness + self.division_chinese() + '）'
 
 class Taishanese(models.Model):
     char = models.ForeignKey(
