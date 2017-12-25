@@ -1,4 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
 <h1>Middle Chinese–Duanfen Taishanese database</h1>
+<p>
+  Middle Chinese data based on the 1981 edition of
+  <a href="http://fdjpkc.fudan.edu.cn/_upload/article/files/aa/1a/5156f64f4ce88a2ee0499adfd1d7/9d820868-2b1c-4ec1-8013-dc9062afb641.pdf">方言調查字表（修訂本）</a>.
+  Some notes on how the Middle Chinese data has been transferred to this
+  database:
+</p>
+<ul>
+  <li>
+    Whereas the source marks whether a character is from the Guangyun (廣韻),
+    Jiyun (集韻), both (via parentheses and/or asterisks), in this database
+    these distinctions are ignored. However, characters that appear only in
+    Jiyun have (*) in their notes. Characters that are from neither Guangyun
+    nor Jiyun (notated with square brackets in the source) have this symbol in
+    their notes [].
+  </li>
+  <li>
+    The use of smaller text beside the character, used in the source as
+    examples of a character’s use (e.g. to clarify a character’s meaning)
+    is represented here as the Note column.
+  </li>
+  <li>
+    If a character has more than one form (shown in parentheses in the source),
+    only the character outside brackets is used, due to Unicode issues and lack
+    of significance in the context of this website.
+  </li>
+  <li>
+    If a character has a more common, similar modern variant (e.g. 朵 as
+    opposed to 朶), the character is changed to the modern variant without
+    comment.
+  </li>
+</ul>
 <p>Note that the rising changed tone is not taken into account.</p>
 <form action="{% url 'tsmc:search' %}" method="get">
   <label for="char">Character(s):</label>
