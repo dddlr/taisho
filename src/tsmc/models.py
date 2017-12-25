@@ -1,7 +1,7 @@
 from django.db import models
 
 class Character(models.Model):
-    char = models.CharField("Chinese character", max_length=1)
+    char = models.CharField("Chinese character", max_length=2)
     initial = models.CharField(
         "initial consonant in Middle Chinese",
         max_length=1
