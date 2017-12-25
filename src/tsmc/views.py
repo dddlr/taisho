@@ -32,8 +32,9 @@ def search(request):
     # 中文 will match 中 and 文
     queryset1 = Character.objects.filter(char_q_objects)
 
-    # Filter using the other fields
-    queryset2 = queryset1.filter(**kwargs)
+    # Filter using the other fields, then turn it into an ordered QuerySet
+    # (to stop pagination from complaining about unordered objects or w/e)
+    queryset2 = queryset1.filter(**kwargs).order_by('char')
 
     # Paginator
     paginator = Paginator(queryset2, 20)
