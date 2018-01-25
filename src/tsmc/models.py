@@ -4,13 +4,13 @@ class Character(models.Model):
     char = models.CharField("Chinese character", max_length=2)
     initial = models.CharField(
         "initial consonant in Middle Chinese",
-        max_length=1
+        max_length=2
     )
     final = models.CharField("final in Middle Chinese", max_length=1)
     tone = models.CharField("tone in Middle Chinese", max_length=1)
     openness = models.CharField("openness in Middle Chinese (1 = open, 2 = closed)", max_length=1)
     division = models.IntegerField("division in Middle Chinese")
-    note = models.CharField("note on character", max_length=10, blank=True)
+    note = models.CharField("note on character", max_length=20, blank=True)
 
     def division_chinese(self):
         divisions = ['一', '二', '三', '四']
@@ -29,6 +29,8 @@ class Taishanese(models.Model):
     initial = models.CharField("initial consonant in Taishanese", max_length=3, blank=True)
     final = models.CharField("final in Taishanese", max_length=4)
     tone = models.CharField("tone in Taishanese", max_length=3)
+    note = models.CharField("note", max_length=50, blank=True)
+    source = models.CharField("source (d = dad, m = mum, u = me but unverified)", max_length=1, blank=True)
 
     def __str__(self):
         return self.initial + self.final + self.tone
