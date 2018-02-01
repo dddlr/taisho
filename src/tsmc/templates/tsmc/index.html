@@ -31,7 +31,7 @@
     opposed to 朶), the character is changed to the modern variant without
     comment. That said, if the modern variant is drastically different (e.g.
     葫蘆 instead of 瓠盧), the modern variant is included in the notes within
-    {curly brackets} instead.
+    {curly brackets} instead. A question mark (?) is used for uncertainty.
   </li>
 </ul>
 <p>Note that the rising changed tone is not taken into account.</p>
@@ -96,7 +96,7 @@
                   <td rowspan="{{ len }}">{{ character.openness }}</td>
                   <td rowspan="{{ len }}">{{ character.note }}</td>
                 {% endif %}
-                <td>{{ taishanese }}</td>
+                <td>{{ taishanese }} ({{ taishanese.source }})</td>
               </tr>
             {% endfor %}
           {% else %}

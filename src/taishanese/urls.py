@@ -20,3 +20,5 @@ urlpatterns = [
     url(r'^tsmc/', include('tsmc.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+
+admin.site.site_header = 'Taishanese'

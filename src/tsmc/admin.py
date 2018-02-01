@@ -9,7 +9,7 @@ class TaishaneseInline(admin.StackedInline):
 class CharacterAdmin(admin.ModelAdmin):
     inlines = [TaishaneseInline]
     list_display = ('__str__', 'note')
-    save_on_top = True
+    # save_on_top = True
     search_fields = ('char',)
 
 class TaishaneseAdmin(admin.ModelAdmin):
