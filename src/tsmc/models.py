@@ -30,7 +30,7 @@ class Taishanese(models.Model):
     final = models.CharField("final in Taishanese", max_length=4)
     tone = models.CharField("tone in Taishanese", max_length=3)
     note = models.CharField("note", max_length=50, blank=True)
-    source = models.CharField("source (d = dad, m = mum, u = me but unverified)", max_length=1, blank=True)
+    source = models.CharField("source (d = dad, m = mum, u = me but unverified)", max_length=1)
 
     def __str__(self):
         return self.initial + self.final + self.tone
