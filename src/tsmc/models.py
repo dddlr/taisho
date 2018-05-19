@@ -10,7 +10,7 @@ class Character(models.Model):
     tone = models.CharField("tone in Middle Chinese", max_length=1)
     openness = models.CharField("openness in Middle Chinese (1 = open, 2 = closed)", max_length=1)
     division = models.IntegerField("division in Middle Chinese")
-    note = models.CharField("note on character", max_length=20, blank=True)
+    note = models.CharField("note on character", max_length=50, blank=True)
 
     def division_chinese(self):
         divisions = ['一', '二', '三', '四']
