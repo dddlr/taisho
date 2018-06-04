@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-Looking at character {{ character }}. <a href="{% url 'tsmc:search' %}">Click here to return home</a><br>
+Looking at character {{ character }}.
+<a href="/admin/tsmc/character/{{ character.id }}/change/">Click here to edit.</a>
+<a href="{% url 'tsmc:search' %}">Click here to return home</a><br>
 <ul>
   <li>Initial: {{ character.initial }}</li>
   <li>Final: {{ character.final }}</li>
