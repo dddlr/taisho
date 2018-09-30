@@ -9,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 class SentenceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__str__', 'romanised', 'english', 'source')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Word, WordAdmin)
