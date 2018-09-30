@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<h1>Middle Chinese–Duanfen Taishanese database</h1>
+<link rel="stylesheet" href="/static/style.css">
+<h1>Middle Chinese database</h1>
+<h2>with Duanfen Taishanese pronunciation data</h2>
 <p>
   This database aims to compare Duanfen Taishanese pronunciations of characters
   with their Middle Chinese rime table data. Since the pronunciations were
@@ -47,7 +49,7 @@
   </li>
 </ul>
 <p>Note that the rising changed tone is not taken into account.</p>
-<form action="{% url 'tsmc:search' %}" method="get">
+<form class="search-form" action="{% url 'tsmc:search' %}" method="get">
   <label for="char">Character(s):</label>
     <input id="char" name="char" placeholder="e.g. 中文" type="text"><br>
   <label for="initial">Initial:</label>
@@ -91,6 +93,7 @@
       <th>Division</th>
       <th>Openness</th>
       <th>Note</th>
+      <th>Jiyun only?</th>
       <th>Taishanese</th>
     </thead>
     <tbody>
@@ -107,8 +110,9 @@
                   <td rowspan="{{ len }}">{{ character.division }}</td>
                   <td rowspan="{{ len }}">{{ character.openness }}</td>
                   <td rowspan="{{ len }}">{{ character.note }}</td>
+                  <td rowspan="{{ len }}">{% if character.jiyun_only %}Yes{% endif %}</td>
                 {% endif %}
-                <td>{{ taishanese }} ({{ taishanese.source }})</td>
+                <td>{{ taishanese }}</td>
               </tr>
             {% endfor %}
           {% else %}
@@ -120,6 +124,7 @@
               <td>{{ character.division }}</td>
               <td>{{ character.openness }}</td>
               <td>{{ character.note }}</td>
+              <td>{% if character.jiyun_only %}Yes{% endif %}</td>
               <td>{{ taishanese }}</td>
             </tr>
           {% endif %}
