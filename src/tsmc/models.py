@@ -10,15 +10,29 @@ class Character(models.Model):
     tone = models.CharField("tone in Middle Chinese", max_length=1)
     openness = models.CharField("openness in Middle Chinese (1 = open, 2 = closed)", max_length=1)
     division = models.IntegerField("division in Middle Chinese")
-    note = models.CharField("note on character", max_length=50, blank=True)
+    note = models.CharField("existing note", max_length=50, blank=True)
+    own_note = models.CharField("my own note", max_length=50, blank=True)
+    variant = models.CharField("more common character", max_length=2, blank=True)
+    jiyun_only = models.BooleanField("jiyun only?", default=False)
+    external = models.BooleanField("from outside chengyun + jiyun?", default=False)
+    # simplified = models.CharField("Simplified character, if any", max_length=2)
 
     def division_chinese(self):
         divisions = ['一', '二', '三', '四']
         return divisions[self.division - 1]
 
     def __str__(self):
-        return self.char + '（' + self.initial + self.final + self.tone + \
-        self.openness + self.division_chinese() + '）'
+        extras_start = ''
+        if self.variant:
+            extras_start = '／' + self.variant
+        extras_end = []
+        if self.jiyun_only:
+            extras_end.append('＊')
+        if self.external:
+            extras_end.append('＃')
+        return self.char + extras_start + '（' + self.initial + self.final + \
+        self.tone + self.openness + self.division_chinese() + \
+        ''.join(extras_end) + '）'
 
 class Taishanese(models.Model):
     char = models.ForeignKey(
@@ -30,10 +44,11 @@ class Taishanese(models.Model):
     final = models.CharField("final in Taishanese", max_length=4)
     tone = models.CharField("tone in Taishanese", max_length=3)
     note = models.CharField("note", max_length=50, blank=True)
-    source = models.CharField("source (d = dad, m = mum, u = me but unverified)", max_length=1)
+    source = models.CharField("source (d = dad, m = mum, u = me but unverified, g = grandma)", max_length=1)
+    date = models.DateField("date", blank=True, null=True)
 
     def __str__(self):
-        return self.initial + self.final + self.tone
+        return self.initial + self.final + self.tone + ' (' + self.source + ')'
 
     def test(self):
         return len(self.final)
