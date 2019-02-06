@@ -1,7 +1,51 @@
-html {
-  font-family: sans-serif;
+body {
+  font-family: 'Source Han Sans TW', 'Source Han Sans CN', 'Source Sans Pro', sans-serif;
+}
+
+a { text-decoration: none; }
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.body {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 50rem;
 }
 
 .search-form {
+  padding: 1rem;
   background-color: #ccc;
+}
+
+.page-links {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-placeholder,
+.page-link {
+  display: inline-block;
+  padding: .75rem;
+}
+
+.page-placeholder {
+  background-color: #eee;
+}
+
+.page-link {
+  background-color: hsl(20,100%,55%);
+  color: #fff;
+}
+
+.next-page {
+  float: right;
+}
+
+/* Middle Chinese database */
+
+.tsmc-char {
+  font-size: 1.5em;
 }

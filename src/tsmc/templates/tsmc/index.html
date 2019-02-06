@@ -1,8 +1,26 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/static/style.css">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Taishanese dictionary</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="header-title">台</div>
+  <ul>
+    <li><a href="/tsmc/">Middle Chinese database</a></li>
+    <li><a href="/dict/">Taishanese dictionary</a></li>
+  </ul>
+</nav>
+
+<div class="body">
+<div class="intro" lang="en">
+
 <h1>Middle Chinese database</h1>
 <h2>with Duanfen Taishanese pronunciation data</h2>
+
 <p>
   This database aims to compare Duanfen Taishanese pronunciations of characters
   with their Middle Chinese rime table data. Since the pronunciations were
@@ -49,6 +67,8 @@
   </li>
 </ul>
 <p>Note that the rising changed tone is not taken into account.</p>
+</div>
+
 <form class="search-form" action="{% url 'tsmc:search' %}" method="get">
   <label for="char">Character(s):</label>
     <input id="char" name="char" placeholder="e.g. 中文" type="text"><br>
@@ -69,20 +89,24 @@
 {% if length %}
 <p>{{ length }} results found.</p>
 {% endif %}
+<div class="page-links">
 {% if character_list.paginator %}
   {% if character_list.has_previous %}
-    <a href="{{ paginator_path }}page={{ character_list.previous_page_number }}">Previous page</a>
+  <a class="page-link prev-page" href="{{ paginator_path }}page={{ character_list.previous_page_number }}">Previous page</a>
   {% else %}
-    Previous page
+  <span class="page-placeholder prev-page">Previous page</span>
   {% endif %}
+
   {% if character_list.has_next %}
-    <a href="{{ paginator_path }}page={{ character_list.next_page_number }}">Next page</a>
+  <a class="page-link next-page" href="{{ paginator_path }}page={{ character_list.next_page_number }}">Next page</a>
   {% else %}
-    Next page
+  <span class="page-placeholder next-page">Next page</span>
   {% endif %}
 {% else %}
 <p>You haven’t searched for anything yet. Returning some arbitrarily-chosen entries.</p>
 {% endif %}
+</div>
+
 {% if character_list %}
   <table>
     <thead>
@@ -103,7 +127,7 @@
             {% for taishanese in character.taishanese_set.all %}
               <tr>
                 {% if forloop.counter == 1 %}
-                  <td rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+                  <td class="tsmc-char" rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
                   <td rowspan="{{ len }}">{{ character.initial }}</td>
                   <td rowspan="{{ len }}">{{ character.final }}</td>
                   <td rowspan="{{ len }}">{{ character.tone }}</td>
@@ -117,7 +141,7 @@
             {% endfor %}
           {% else %}
             <tr>
-              <td><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
+              <td class="tsmc-char"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
               <td>{{ character.initial }}</td>
               <td>{{ character.final }}</td>
               <td>{{ character.tone }}</td>
@@ -135,3 +159,8 @@
 {% else %}
   <p>No characters found :(</p>
 {% endif %}
+
+</div>
+
+</body>
+</html>
