@@ -1,73 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Taishanese dictionary</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-
-<nav>
-  <div class="header-title">台</div>
-  <ul>
-    <li><a href="/tsmc/">Middle Chinese database</a></li>
-    <li><a href="/dict/">Taishanese dictionary</a></li>
-  </ul>
-</nav>
-
-<div class="body">
-<div class="intro" lang="en">
-
+{% extends "base.html" %}
+{% block content %}
 <h1>Middle Chinese database</h1>
 <h2>with Duanfen Taishanese pronunciation data</h2>
 
 <p>
-  This database aims to compare Duanfen Taishanese pronunciations of characters
-  with their Middle Chinese rime table data. Since the pronunciations were
-  elicited from them directly, they will virtually all be literary
-  pronunciations (used in reading out written text, usually in compounds)
-  instead of colloquial pronunciations (used in informal speech, usually in
-  monosyllabic words).
+  This database aims to compare Duanfen Taishanese pronunciations (mostly
+  literary pronunciations) of characters with their Middle Chinese rime table
+  data. Find out more about how this works in the
+  <a href="/tsmc/about/">about</a> page.
 </p>
-<p>
-  Both my parents are from Duanfen (born late 1960s) in Duanfen.
-</p>
-<p>
-  Middle Chinese data based on the 1981 edition of
-  <a href="https://web.archive.org/web/20180529082256/http://fdjpkc.fudan.edu.cn/_upload/article/files/aa/1a/5156f64f4ce88a2ee0499adfd1d7/9d820868-2b1c-4ec1-8013-dc9062afb641.pdf<Paste>">方言調查字表（修訂本）</a>.
-  Some notes on how the Middle Chinese data has been transferred to this
-  database:
-</p>
-<ul>
-  <li>
-    Whereas the source marks whether a character is from the Guangyun (廣韻),
-    Jiyun (集韻), both (via parentheses and/or asterisks), in this database
-    these distinctions are ignored. However, characters that appear only in
-    Jiyun have (*) in their notes. Characters that are from neither Guangyun
-    nor Jiyun (notated with square brackets in the source) have this symbol in
-    their notes [].
-  </li>
-  <li>
-    The use of smaller text beside the character, used in the source as
-    examples of a character’s use (e.g. to clarify a character’s meaning)
-    is represented here as the Note column.
-  </li>
-  <li>
-    If a character has more than one form (shown in parentheses in the source),
-    only the character outside brackets is used, due to Unicode issues and lack
-    of significance in the context of this website.
-  </li>
-  <li>
-    If a character has a more common, similar modern variant (e.g. 朵 instead
-    of 朶, 群 instead of 羣), the character is changed to the modern variant
-    without comment. That said, if the modern variant is drastically different
-    (e.g. 葫蘆 instead of 瓠盧), the modern variant is included in the notes
-    within {curly brackets} instead. A question mark (?) is used for
-    uncertainty.
-  </li>
-</ul>
-<p>Note that the rising changed tone is not taken into account.</p>
-</div>
 
 <form class="search-form" action="{% url 'tsmc:search' %}" method="get">
   <label for="char">Character(s):</label>
@@ -87,7 +28,7 @@
   <input type="submit" value="Search">
 </form>
 {% if length %}
-<p>{{ length }} results found.</p>
+<p>{{ length }} result{% if length != 1 %}s {% endif %} found.</p>
 {% endif %}
 <div class="page-links">
 {% if character_list.paginator %}
@@ -108,59 +49,30 @@
 </div>
 
 {% if character_list %}
-  <table>
-    <thead>
-      <th>Char.</th>
-      <th>Initial</th>
-      <th>Final</th>
-      <th>Tone</th>
-      <th>Division</th>
-      <th>Openness</th>
-      <th>Note</th>
-      <th>Jiyun only?</th>
-      <th>Taishanese</th>
-    </thead>
-    <tbody>
-      {% for character in character_list %}
-        {% with len=character.taishanese_set.all.count %}
-          {% if character.taishanese_set.all %}
-            {% for taishanese in character.taishanese_set.all %}
-              <tr>
-                {% if forloop.counter == 1 %}
-                  <td class="tsmc-char" rowspan="{{ len }}"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
-                  <td rowspan="{{ len }}">{{ character.initial }}</td>
-                  <td rowspan="{{ len }}">{{ character.final }}</td>
-                  <td rowspan="{{ len }}">{{ character.tone }}</td>
-                  <td rowspan="{{ len }}">{{ character.division }}</td>
-                  <td rowspan="{{ len }}">{{ character.openness }}</td>
-                  <td rowspan="{{ len }}">{{ character.note }}</td>
-                  <td rowspan="{{ len }}">{% if character.jiyun_only %}Yes{% endif %}</td>
-                {% endif %}
-                <td>{{ taishanese }}</td>
-              </tr>
-            {% endfor %}
-          {% else %}
-            <tr>
-              <td class="tsmc-char"><a href="{% url 'tsmc:character' character.id %}">{{ character.char }}</a></td>
-              <td>{{ character.initial }}</td>
-              <td>{{ character.final }}</td>
-              <td>{{ character.tone }}</td>
-              <td>{{ character.division }}</td>
-              <td>{{ character.openness }}</td>
-              <td>{{ character.note }}</td>
-              <td>{% if character.jiyun_only %}Yes{% endif %}</td>
-              <td>{{ taishanese }}</td>
-            </tr>
-          {% endif %}
-        {% endwith %}
+<div class="results-list character-list">
+  {% for character in character_list %}
+  <!-- TODO character.note -->
+  <!-- TODO character.own_note -->
+  <div class="result character">
+    <a class="result-link character-link" href="{% url 'tsmc:character' character.id %}"><div class="result-name character-name">{{ character.char }}</div></a>
+    <div class="character-info">
+      <div class="character-misc">
+        {% if character.variant %}({{ character.variant }}){% endif %}
+        {% if character.jiyun_only %}<span class="character-jiyun">集</span>{% endif %}
+        {% if character.external %}<span class="character-external">外</span>{% endif %}
+      </div>
+      <div class="character-mc">{{ character.info }}</div>
+    </div>
+    <div class="character-prons">
+      {% for taishanese in character.taishanese_set.all %}
+      <div class="character-pron{% if taishanese.source == 'u' %} character-pron-uncertain{% endif %}">{{ taishanese.syllable }}<sup>{{ taishanese.tone }}</sup></div>
       {% endfor %}
-    </tbody>
-  </table>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% else %}
-  <p>No characters found :(</p>
+<p>No characters found :(</p>
 {% endif %}
 
-</div>
-
-</body>
-</html>
+{% endblock %}

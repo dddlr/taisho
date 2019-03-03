@@ -34,6 +34,23 @@ class Character(models.Model):
         self.tone + self.openness + self.division_chinese() + \
         ''.join(extras_end) + '）'
 
+    def info(self):
+        # Until I update the values in the database so they're not numbers
+        tones = ['平', '上', '去', '入']
+        opennesses = ['開', '合']
+        tone = self.tone
+        openness = self.openness
+        try:
+            tone = tones[int(self.tone) - 1]
+        except ValueError:
+            pass
+        try:
+            openness = opennesses[int(self.openness) - 1]
+        except ValueError:
+            pass
+
+        return self.initial + self.final + tone + openness + self.division_chinese()
+
 class Taishanese(models.Model):
     char = models.ForeignKey(
         Character,
@@ -49,6 +66,9 @@ class Taishanese(models.Model):
 
     def __str__(self):
         return self.initial + self.final + self.tone + ' (' + self.source + ')'
+
+    def syllable(self):
+        return self.initial + self.final
 
     def test(self):
         return len(self.final)
