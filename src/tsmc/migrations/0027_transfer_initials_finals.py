@@ -5,10 +5,22 @@ from django.db import migrations
 # https://stackoverflow.com/a/36000084
 
 def link_initials(apps, schema_editor):
-    pass
+    Initial = apps.get_model('tsmc', 'Initial')
+    Character = apps.get_model('tsmc', 'Character')
+    for character in Character.objects.all():
+        # https://docs.djangoproject.com/en/2.1/ref/models/querysets/#get-or-create
+        # created is a bool specifying whether new obj was created
+        initial, created = Initial.objects.get_or_create(name=character.initial)
+        character.initial_key = initial
+        character.save()
 
-def link_finals(apps, schema_editor)
-
+def link_finals(apps, schema_editor):
+    Final = apps.get_model('tsmc', 'Final')
+    Character = apps.get_model('tsmc', 'Character')
+    for character in Character.objects.all():
+        final, created = Final.objects.get_or_create(name=character.final)
+        character.final_key = final
+        character.save()
 
 class Migration(migrations.Migration):
 
@@ -17,4 +29,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(link_initials),
+        migrations.RunPython(link_finals),
     ]

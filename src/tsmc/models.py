@@ -1,12 +1,29 @@
 from django.db import models
 
+class Initial(models.Model):
+    name = models.CharField("Name", max_length=2)
+    baxter = models.CharField("Baxter's transcription", max_length=4)
+    other = models.CharField("Other initials this encompasses", max_length=4, blank=True)
+    def __str__(self):
+        return self.baxter + ' (' + self.name + ')'
+
+class Final(models.Model):
+    name = models.CharField("Name", max_length=1)
+    baxter = models.CharField("Baxter's transcription", max_length=8)
+
+    def __str__(self):
+        return self.baxter + ' (' + self.name + ')'
+
 class Character(models.Model):
     char = models.CharField("Chinese character", max_length=2)
+    # TODO: remove initial and final when entire database is done
     initial = models.CharField(
         "initial consonant in Middle Chinese",
         max_length=2
     )
     final = models.CharField("final in Middle Chinese", max_length=1)
+    initial_key = models.ForeignKey("Initial", on_delete=models.SET_NULL, null=True)
+    final_key = models.ForeignKey("Final", on_delete=models.SET_NULL, null=True)
     tone = models.CharField("tone in Middle Chinese", max_length=1)
     openness = models.CharField("openness in Middle Chinese (1 = open, 2 = closed)", max_length=1)
     division = models.IntegerField("division in Middle Chinese")
@@ -15,6 +32,7 @@ class Character(models.Model):
     variant = models.CharField("more common character", max_length=2, blank=True)
     jiyun_only = models.BooleanField("jiyun only?", default=False)
     external = models.BooleanField("from outside chengyun + jiyun?", default=False)
+    dot = models.BooleanField("has mysterious dot to the left", default=False)
     # simplified = models.CharField("Simplified character, if any", max_length=2)
 
     def division_chinese(self):
@@ -30,9 +48,9 @@ class Character(models.Model):
             extras_end.append('＊')
         if self.external:
             extras_end.append('＃')
-        return self.char + extras_start + '（' + self.initial + self.final + \
-        self.tone + self.openness + self.division_chinese() + \
-        ''.join(extras_end) + '）'
+        return self.char + extras_start + '（' + self.initial_key.name + \
+            self.final_key.name + self.tone + self.openness + \
+            self.division_chinese() + ''.join(extras_end) + '）'
 
     def info(self):
         # Until I update the values in the database so they're not numbers
@@ -49,7 +67,7 @@ class Character(models.Model):
         except ValueError:
             pass
 
-        return self.initial + self.final + tone + openness + self.division_chinese()
+        return self.initial_key.name + self.final_key.name + tone + openness + self.division_chinese()
 
 class Taishanese(models.Model):
     char = models.ForeignKey(
