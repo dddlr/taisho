@@ -1,4 +1,6 @@
 """
+Temporary settings to make heroku happy
+
 More info:
 https://docs.djangoproject.com/en/1.11/topics/settings/
 
@@ -10,6 +12,20 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SECRET_KEY = 't7y6thl$b%nw=+voj&^%3ci_43&2vb1q0hc&7(r1f!gb4b4(9j'
+DEBUG = True
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'taishanese',
+        'USER': 'blep',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '5432',
+    }
+}
 
 # Application definition
 

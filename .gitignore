@@ -1,3 +1,5 @@
 env/
-secret/
+env_old/
+secrets/
 __pycache__/
+packages.txt

@@ -2,4 +2,6 @@ from .base import *
 
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = '/var/www/taisho/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+SECRET_KEY = 'placeholder change me'
