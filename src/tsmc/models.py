@@ -40,17 +40,33 @@ class Character(models.Model):
         return divisions[self.division - 1]
 
     def __str__(self):
-        extras_start = ''
+        character = self.char
         if self.variant:
-            extras_start = '／' + self.variant
-        extras_end = []
+            character += '／' + self.variant
+
+        character += '（'
+
+        if self.initial_key:
+            character += self.initial_key.name
+        else:
+            character += '？'
+        if self.final_key:
+            character += self.final_key.name
+        else:
+            character += '？'
+
+        character += self.tone + self.openness + self.division_chinese()
+
         if self.jiyun_only:
-            extras_end.append('＊')
+            character += '＊'
         if self.external:
-            extras_end.append('＃')
-        return self.char + extras_start + '（' + self.initial_key.name + \
-            self.final_key.name + self.tone + self.openness + \
-            self.division_chinese() + ''.join(extras_end) + '）'
+            character += '＃'
+        if self.dot:
+            character += '．'
+
+        character += '）'
+
+        return character
 
     def info(self):
         # Until I update the values in the database so they're not numbers
