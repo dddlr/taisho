@@ -1,5 +1,6 @@
-Django~=2.1.1
-django-watson~=1.5.2
-psycopg2-binary~=2.7.5
-pytz~=2018.9
+Django
+django-watson
+psycopg2-binary
+pytz
+gunicorn
 
