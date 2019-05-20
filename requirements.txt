@@ -3,4 +3,4 @@ django-watson
 psycopg2-binary
 pytz
 gunicorn
-
+dj-database-url
