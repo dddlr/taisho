@@ -8,24 +8,24 @@ Full list of settings:
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 't7y6thl$b%nw=+voj&^%3ci_43&2vb1q0hc&7(r1f!gb4b4(9j'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'taishanese',
-        'USER': 'blep',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '5432',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'taishanese',
+       'USER': 'blep',
+       'PASSWORD': '',
+       'HOST': '',
+       'PORT': '5432',
+  }
 }
 
 # Application definition
@@ -108,3 +108,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DATABASES['default'] = dj_database_url.config(default='postgresql://blep@localhost:5432/taishanese', conn_max_age=600, ssl_require=True)
