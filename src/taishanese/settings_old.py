@@ -94,19 +94,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Pacific/Auckland'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
-DATABASES['default'] = dj_database_url.config(default='postgresql://blep@localhost:5432/taishanese', conn_max_age=600, ssl_require=True)
+# whether to NOT use ssl (this should be true only on local environment)
+DATABASE_NO_SSL = os.getenv('DATABASE_NO_SSL').lower() == 'true'
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=DATABASE_NO_SSL)

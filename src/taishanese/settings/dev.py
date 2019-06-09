@@ -1,21 +1,12 @@
+"""Settings used in dev environment."""
+
 from .base import *
+import dj_database_url
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't7y6thl$b%nw=+voj&^%3ci_43&2vb1q0hc&7(r1f!gb4b4(9j'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'taishanese',
-        'USER': 'blep',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '5432',
-    }
-}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=False)

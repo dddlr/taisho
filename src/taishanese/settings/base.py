@@ -1,4 +1,6 @@
 """
+Settings used in both dev and production environments.
+
 More info:
 https://docs.djangoproject.com/en/1.11/topics/settings/
 
@@ -77,17 +79,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Pacific/Auckland'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SECRET_KEY = os.environ['SECRET_KEY']
+
+# set in dev.py and prod.py
+DATABASES = {}
