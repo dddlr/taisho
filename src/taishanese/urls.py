@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^tsmc/', include('tsmc.urls')),
     url(r'^dict/', include('tspron.urls')),
     url(r'^admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
-admin.site.site_header = 'Taishanese'
+admin.site.site_header = 'taisho'
