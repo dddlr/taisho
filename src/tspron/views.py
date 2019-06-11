@@ -3,7 +3,8 @@ from django.shortcuts import render
 from .models import Word
 
 def search(request):
-    word_list = Word.objects.all().order_by('word')
+    """Render search and results page of Taishanese dictionary."""
+    word_list = Word.objects.all().filter(public=True).order_by('word')
     paginator = Paginator(word_list, 20)
 
     page = request.GET.get('page', 1)
