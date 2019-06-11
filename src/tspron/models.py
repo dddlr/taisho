@@ -6,21 +6,10 @@ class Word(models.Model):
     gloss = models.TextField("Gloss/definition(s)")
     note = models.TextField("Note", blank=True)
     date = models.DateField("Date", null=True, blank=True)
-    category = models.ForeignKey(
-        'Category',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
 
     def __str__(self):
         return self.word
 
-class Category(models.Model):
-    name = models.CharField("Category name", max_length=30)
-
-    def __str__(self):
-        return self.name
 
 class Sentence(models.Model):
     sentence = models.CharField("Sentence", max_length=60)
