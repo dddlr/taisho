@@ -21,6 +21,6 @@ def search(request):
 
     return render(request, 'tspron/index.html', context)
 
-def faq(request):
-    """Return FAQ page."""
-    return render(request, 'tspron/faq.html')
+def about(request):
+    """Return about page."""
+    return render(request, 'tspron/about.html')
