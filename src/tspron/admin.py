@@ -17,7 +17,7 @@ class WordAdmin(admin.ModelAdmin):
         return ' / '.join(str(x) for x in Pron.objects.filter(word=word.id))
 
 class PronAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'word', 'date', 'note')
+    list_display = ('__str__', 'word', 'date')
 
 class SentenceAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'romanised', 'english', 'source')

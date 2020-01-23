@@ -5,7 +5,10 @@ class Word(models.Model):
     gloss = models.TextField("Gloss/definition(s)")
     note = models.TextField("Note", blank=True)
     date = models.DateField("Date")
-    pron_old = models.CharField("Pronunciation (old)", max_length=75, blank=True)
+    # deprecated, TODO remove
+    pron_old = models.CharField("Pronunciation (old)", max_length=75,
+                                blank=True)
+    pron_note = models.TextField("Pronunciation note", blank=True)
     public = models.BooleanField("Public?", default=False)
 
     def __str__(self):
@@ -17,16 +20,16 @@ class Pron(models.Model):
     date = models.DateField("Date")
     # d = dad, m = mum, u = me, gm = grandma
     source = models.CharField("Source", max_length=5)
-    note = models.TextField("Note", blank=True)
 
     def __str__(self):
-        return f"{self.pron} ({self.source})"
+        return f"{self.pron} ({self.source}, {self.date})"
 
 class Sentence(models.Model):
     sentence = models.CharField("Sentence", max_length=60)
     romanised = models.CharField("Romanised", max_length=200)
     english = models.CharField("English translation", max_length=200)
-    source = models.CharField("source (d = dad, m = mum, u = me, gm = grandma)", max_length=1)
+    source = models.CharField("source (d = dad, m = mum, u = me, gm = grandma)",
+                              max_length=1)
     note = models.TextField("Note", blank=True)
     date = models.DateField("Date", null=True, blank=True)
 
