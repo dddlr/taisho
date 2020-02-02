@@ -1,12 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Hello! This is
+
+<h2>Welcome to Taisho, the Duanfen Taishanese dictionary</h2>
+<p>
+Taisho aims to document the <a href="https://en.wikipedia.org/wiki/Taishanese">Taishanese</a> dialect of my parents, born and raised in <a href="https://en.wikipedia.org/wiki/Duanfen">Duanfen Village</a> in <a href="https://en.wikipedia.org/wiki/Taishan,_Guangdong">Taishan, Guangdong, China.</a> “Taishanese” and “Taishan” are not to be confused with the other <a href="https://en.wikipedia.org/wiki/Mount_Tai">Taishan</a> in Shandong, or <a href="https://en.wikipedia.org/wiki/Taiwanese_Hokkien">Taiwanese</a> spoken in the region of Taiwan.
+</p>
+
+<p>
+Before discussing what this project aims to achieve, I must acknowledge and thank the creators and editors of the online dictionaries that inspired this project, notably Stephen Li’s Taishanese dictionary, words.hk and MOEDict. These fantastic dictionaries gave and continue to give me the inspiration and motivation for this dictionary project.
+</p>
+
+<p>
+While the handful of Taishanese dictionaries (listed at the bottom of this page) are very detailed and make great resources already, there are some things they lack that I aim to address with this project:
+</p>
+
+<ul>
+  <li>The word coverage of other dictionaries are different
+    狗蝨包 (geu2 seot2 bou3-5*, a type of black steamed dumpling)
+  </li>
+  <li>There are regrettably no dictionaries that document the Duanfen dialect. As far as I am aware, dictionaries for Taishanese focus on the prestige dialect spoken in <a href="https://en.wikipedia.org/wiki/Taicheng_Subdistrict">Taicheng Township</a>, the capital of Taishan City.</li>
+  <li>I hope to create a more polished interface, similar to what <a href="https://words.hk/">words.hk</a> has done.</li>
+</ul>
+
+<p>
+  My <a href="https://ts.wong.nz/2017/duanfen-romanisation/">Duanfen Taishanese romanization</a> is used throughout.
+  Currently only <strong>Traditional Chinese</strong> is supported (except where the Traditional Chinese character doesn’t exist, e.g. 㑢), because it is significantly easier converting from Traditional Chinese to Simplified Chinese than the other way around. However, I plan on adding Simplified Chinese support in the future—watch this space. :)
+</p>
+
+<p>
+  There is currently a total of <strong>300</strong> entries, as of February 2nd, 2020. The goal is to one day rival Stephen Li’s 9000+ entries, though that of course will take quite some time...
+</p>
 
 <h2>What are the stuff in parentheses/round brackets?</h2>
 
 <p>
-  In parentheses is what part of speech a definition is. They are based on but
-  are slightly different to those used in the
+  The labels represent a word’s part of speech, i.e. what kind of word it is.
+  They are based on but are slightly different to those used in the
   <a href="http://android.pleco.com/manual/240/abc.html#pos">ABC Chinese-English Dictionary</a>.
 </p>
 
@@ -15,9 +44,9 @@
   there may still be entries using Chinese for this.
 </p>
 
-<ul lang="en">
+<ul>
   <li>
-    <strong>(adj)</strong> or <strong>形</strong>: adjective; also called stative verb.
+    <strong>(adj)</strong> or <strong>(形)</strong>: adjective; also called stative verb.
     Although the latter term would be more accurate, The former term is used in
     this dictionary due to its familiarity with English speakers. Although its
     function is similar to adjectives in English, they behave a lot like verbs
@@ -36,6 +65,9 @@
     that indicates the stage of completion of an action.
   </li>
   <li>
+    <strong>(conj)</strong>: conjunction.
+  </li>
+  <li>
     <strong>(f.e.)</strong> fixed expression.
     This encompasses set expressions or idioms where there is little to no
     freedom to substitute different words, e.g. 比上不足，比下有餘 (bi2 siang6
@@ -49,7 +81,7 @@
     situation.
   </li>
   <li>
-    <strong>(n)</strong> or (名): noun.
+    <strong>(n)</strong> or <strong>(名)</strong>: noun.
     This includes time words (e.g. 今日 geom3 meot5,
     “today”), proper nouns (騰訊 hang4 hleon3, “Tencent”), and place words
     (廣州 gong2 dxeu3, “Guangzhou City”) but excludes pronouns.
@@ -61,6 +93,9 @@
   <li>
     <strong>(pr)</strong> or <strong>(代)</strong>: pronoun.
     For example 你 (ni3, “you (singular)”).
+  </li>
+  <li>
+    <strong>(介)</strong>: preposition.
   </li>
   <li>
     <strong>(v)</strong> or <strong>(動)</strong>: verb.
@@ -95,6 +130,9 @@
   <li>Stephen Li:
     <a href="https://www.stephen-li.com/TaishaneseVocabulary/Taishanese.html">Taishanese dictionary</a>
   </li>
+  <li>Pearl River Delta Vol. 2:
+    (TODO)
+  </li>
 </ul>
 
 <p>
@@ -104,4 +142,14 @@
   and occasionally the other dictionaries that came with
   <a href="http://www.pleco.com/products/pleco-for-android/pricing/">Pleco’s Professional Bundle</a>.
 </p>
+
+<h2>Other Taishanese dictionaries</h2>
+
+<p>Below are some of the Taishanese dictionaries I know about, made by great people who have spent years of time and effort writing huge numbers of entries. Go check them out!</p>
+
+<ul>
+  <li><a href="https://www.stephen-li.com/TaishaneseVocabulary/Taishanese.html">Stephen Li’s Taishanese dictionary</a></li>
+  <li><a href="https://sites.fitnyc.edu/users/gene_chin/HED">Hoisanva English Dictionary</a></li>
+  <li>台山方音字典, by 邓钧</li>
+</ul>
 {% endblock %}
