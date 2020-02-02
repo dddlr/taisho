@@ -5,7 +5,6 @@ import dj_database_url
 
 DEBUG = True
 
-SECRET_KEY = os.environ['SECRET_KEY']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Database
