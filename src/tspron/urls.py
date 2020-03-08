@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'tspron'
 urlpatterns = [
-    url(r'^$', views.index, name='index')
-    url(r'^(?P<word_id>[0-9]+)/$', views.word, name='word')
+    url(r'^$', views.search, name='search'),
 ]

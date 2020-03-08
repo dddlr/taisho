@@ -2,12 +2,12 @@ from django.db import models
 
 class Word(models.Model):
     word = models.CharField("Chinese word or phrase", max_length=10)
-    pron = models.CharField("Pronunciation", max_length=30)
-    gloss = models.CharField("Gloss", max_length=100)
+    pron = models.CharField("Pronunciation", max_length=50)
+    gloss = models.TextField("Gloss/definition(s)")
     note = models.CharField("Note", max_length=100, blank=True)
     category = models.ForeignKey(
         'Category',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )
