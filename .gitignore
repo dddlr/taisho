@@ -2,5 +2,6 @@
 env/
 env_old/
 secrets/
+staticfiles/
 __pycache__/
 packages.txt
