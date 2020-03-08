@@ -14,7 +14,7 @@ class CharacterView(generic.DetailView):
 def search(request):
     page = request.GET.get('page', 1)
 
-    VALID_COLUMNS = ['char', 'initial', 'final', 'tone', 'openness', 'division', 'note']
+    VALID_COLUMNS = ['char', 'initial', 'final', 'tone', 'openness', 'division']
     # Filter out invalid query strings from user
     columns = {column: request.GET.get(column, '') for column in VALID_COLUMNS}
 
