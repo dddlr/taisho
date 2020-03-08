@@ -19,3 +19,7 @@ def search(request):
     VALID_COLUMNS = ['word', 'pron', 'gloss']
 
     return render(request, 'tspron/index.html', context)
+
+def faq(request):
+    """Return FAQ page."""
+    return render(request, 'tspron/faq.html')

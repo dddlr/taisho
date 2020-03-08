@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Taishanese dictionary</h1>
-<form class="search-form" method="get">
-  <label>Search</label>
-  <input type="submit" value="Search!">
-</form>
 
 {% if word_list.paginator %}
 
@@ -16,7 +12,7 @@
   <div class="result word">
     <a class="result-link word-link" href=""><div class="result-name word-name">{{ word.word }}</div></a>
     <div class="word-pron">{{ word.pron }}</div>
-    <div class="word-def">{{ word.gloss }}</div>
+    <div class="word-def">{{ word.gloss | linebreaks }}</div>
     <div class="word-note">{{ word.note }}</div>
     <div class="word-category">{{ word.category }}</div>
   </div>

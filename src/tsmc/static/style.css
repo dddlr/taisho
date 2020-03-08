@@ -10,9 +10,9 @@ body {
 
 /* use proportional smart apostrophes instead of fullwidth (applies to source
  * han sans only) */
-/*
+
 :lang(en) { font-feature-settings: 'pwid'; }
-*/
+
 
 a {
   color: hsl(20,100%,45%);
