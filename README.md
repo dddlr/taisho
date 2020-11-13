@@ -57,3 +57,12 @@ $ . ./env/bin/activate
 $ export $(cat .env | xargs)
 $ heroku local
 ```
+
+## Using manage.py
+
+```sh
+$ export $(xargs <../.env)
+$ cd src
+$ python3 manage.py shell
+# etc...
+```
