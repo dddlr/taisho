@@ -32,7 +32,7 @@ class Character(models.Model):
     variant = models.CharField("more common character", max_length=2, blank=True)
     jiyun_only = models.BooleanField("jiyun only?", default=False)
     external = models.BooleanField("from outside chengyun + jiyun?", default=False)
-    dot = models.BooleanField("has mysterious dot to the left", default=False)
+    # chongniu = models.BooleanField("chongniu?", default=False)
     # simplified = models.CharField("Simplified character, if any", max_length=2)
 
     def division_chinese(self):
@@ -61,8 +61,6 @@ class Character(models.Model):
             character += '＊'
         if self.external:
             character += '＃'
-        if self.dot:
-            character += '．'
 
         character += '）'
 
