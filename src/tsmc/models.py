@@ -1,6 +1,9 @@
 from django.db import models
 
 class Initial(models.Model):
+    class Meta:
+        ordering = ('name', 'baxter')
+
     name = models.CharField("Name", max_length=2)
     baxter = models.CharField("Baxter's transcription", max_length=4)
     other = models.CharField("Other initials this encompasses", max_length=4, blank=True)
@@ -8,6 +11,9 @@ class Initial(models.Model):
         return self.baxter + ' (' + self.name + ')'
 
 class Final(models.Model):
+    class Meta:
+        ordering = ('name', 'baxter')
+
     name = models.CharField("Name", max_length=1)
     baxter = models.CharField("Baxter's transcription", max_length=8)
 

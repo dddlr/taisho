@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from . import views
 
 app_name = 'tspron'
 urlpatterns = [
-    url(r'^$', views.search, name='search'),
-    url(r'about/', views.about, name='about'),
+    path('', views.search, name='search'),
+    re_path(r'about/', views.about, name='about'),
 ]
