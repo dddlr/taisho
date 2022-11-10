@@ -61,7 +61,8 @@ class Character(models.Model):
         else:
             character += '？'
 
-        character += self.tone + self.openness + self.division_chinese()
+        character += self.get_hanzi_tone() + self.get_hanzi_openness() + \
+            self.division_chinese()
 
         if self.jiyun_only:
             character += '＊'
@@ -72,21 +73,30 @@ class Character(models.Model):
 
         return character
 
-    def info(self):
-        # Until I update the values in the database so they're not numbers
+    def get_hanzi_tone(self):
         tones = ['平', '上', '去', '入']
-        opennesses = ['開', '合']
         tone = self.tone
-        openness = self.openness
         try:
-            tone = tones[int(self.tone) - 1]
+            tone = tones[int(tone) - 1]
         except ValueError:
             pass
+
+        return tone
+
+    def get_hanzi_openness(self):
+        opennesses = ['開', '合']
+        openness = self.openness
         try:
             openness = opennesses[int(self.openness) - 1]
         except ValueError:
             pass
 
+        return openness
+
+    def info(self):
+        # Until I update the values in the database so they're not numbers
+        tone = self.get_hanzi_tone()
+        openness = self.get_hanzi_openness()
         return self.initial_key.name + self.final_key.name + tone + openness + self.division_chinese()
 
 class Taishanese(models.Model):
