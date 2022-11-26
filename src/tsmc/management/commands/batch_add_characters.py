@@ -5,8 +5,8 @@ import csv
 # Assumption: Order is
 # 01. Character
 # 02. Initial
-# 03. Final
-# 04. Tone
+# 03. Tone
+# 04. Final
 # 05. Openness (1 = open, 2 = closed)
 # 06. Division
 # 07. Jiyun only?
@@ -15,14 +15,19 @@ import csv
 # 10. Gloss
 # 11. Notes
 
+DRY_RUN = True
+
 class Command(BaseCommand):
-    help = 'Batch add characters to database from a CSV spreadsheet. Uncomment\
-    the "character.save()" line in the code first.'
+    help = 'Batch add characters to database from a CSV spreadsheet.'
 
     def add_arguments(self, parser):
         parser.add_argument('path', type=str)
 
     def handle(self, *args, **options):
+        if DRY_RUN:
+            print("Dry run. Change the DRY_RUN variable in the code to False \
+                  to update the database.")
+
         with open(options['path']) as csvfile:
             # data = csv.reader(csvfile)
             data = csv.reader(csvfile)
@@ -30,7 +35,7 @@ class Command(BaseCommand):
                 if i == 0:  # Skip the header row
                     continue
                 assert len(row) == 11
-                character, initial, final, tone, openness, division, jiyun_only, \
+                character, initial, tone, final, openness, division, jiyun_only, \
                 outside_jiyun_chengyun, more_common_variant, gloss, note = row
 
                 initial_key = Initial.objects.get(name=initial)
@@ -50,6 +55,8 @@ class Command(BaseCommand):
 
                 )
 
-                print(f"Adding {character}")
-                # TODO: uncomment when we want to save to database
-                # character.save()
+                if DRY_RUN:
+                    print(f"[dry run] adding {character}")
+                else:
+                    print(f"Adding {character}")
+                    character.save()
