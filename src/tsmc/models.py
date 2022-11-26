@@ -33,6 +33,7 @@ class Character(models.Model):
     tone = models.CharField("tone in Middle Chinese", max_length=1)
     openness = models.CharField("openness in Middle Chinese (1 = open, 2 = closed)", max_length=1)
     division = models.IntegerField("division in Middle Chinese")
+    gloss = models.CharField("gloss", max_length=50, blank=True)
     note = models.CharField("existing note", max_length=50, blank=True)
     own_note = models.CharField("my own note", max_length=50, blank=True)
     variant = models.CharField("more common character", max_length=2, blank=True)
