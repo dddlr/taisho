@@ -22,12 +22,6 @@ class Final(models.Model):
 
 class Character(models.Model):
     char = models.CharField("Chinese character", max_length=2)
-    # TODO: remove initial and final when entire database is done
-    initial = models.CharField(
-        "initial consonant in Middle Chinese",
-        max_length=2
-    )
-    final = models.CharField("final in Middle Chinese", max_length=1)
     initial_key = models.ForeignKey("Initial", on_delete=models.SET_NULL, null=True)
     final_key = models.ForeignKey("Final", on_delete=models.SET_NULL, null=True)
     tone = models.CharField("tone in Middle Chinese", max_length=1)
