@@ -15,11 +15,10 @@ class TaishaneseInline(admin.StackedInline):
 
 class CharacterAdmin(admin.ModelAdmin):
     inlines = [TaishaneseInline]
-    list_display = ('__str__', 'note', 'taishanese')
+    list_display = ('__str__', 'gloss', 'note', 'own_note', 'taishanese')
     # save_on_top = True
-    search_fields = ('char',)
+    search_fields = ('char', 'gloss', 'variant', 'note', 'own_note')
     autocomplete_fields = ('initial_key', 'final_key')
-    exclude = ('initial', 'final')
 
     def taishanese(self, obj):
         """Get the Taishanese pronunciation(s) of a character as a string."""

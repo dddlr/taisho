@@ -31,7 +31,7 @@ class Character(models.Model):
     note = models.CharField("existing note", max_length=50, blank=True)
     own_note = models.CharField("my own note", max_length=50, blank=True)
     variant = models.CharField("more common character", max_length=2, blank=True)
-    jiyun_only = models.BooleanField("jiyun only?", default=False)
+    jiyun_only = models.BooleanField("jiyun only? (＊)", default=False)
     external = models.BooleanField("from outside chengyun + jiyun?", default=False)
     # chongniu = models.BooleanField("chongniu?", default=False)
     # simplified = models.CharField("Simplified character, if any", max_length=2)
